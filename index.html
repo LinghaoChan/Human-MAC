@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head -->
+
+<head>
+  <!-- Standard metadata -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>HumanMAC: Masked Motion Completion for Human Motion Prediction</title>
+  <meta name="author" content="Jiawei Zhang" />
+  <meta name="description" content="Masked Motion Completion for Human Motion Prediction" />
+  <meta name="keywords" content="HumanMAC " />
+
+  <!-- Google Search Verification -->
+  <!-- <meta name="google-site-verification" content="aF7wSOljWeE2IT3HvAhPwdnNxup1zdKCrFf50yCFMoE" /> -->
+
+  <!-- Bootstrap & MDB -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha256-DF7Zhf293AJxJNTmh5zhoYYIMs2oXitRfBjY+9L//AY=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css"
+    integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous" />
+
+  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"
+    integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css"
+    integrity="sha256-i1+4qU2G2860dGGIOJscdC30s9beBXjFfzjWLjBRsBg=" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css"
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
+
+  <!-- Code Syntax Highlighting -->
+  <link rel="stylesheet" href="https://gitcdn.link/repo/jwarby/jekyll-pygments-themes/master/github.css" />
+
+  <!-- Styles -->
+  <link rel="icon" href="./assets/img/icon.png">
+  <link rel="stylesheet" href="./assets/css/main.css">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VHPFHC4JTP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-VHPFHC4JTP');
+  </script>
+</head>
+
+<!-- Body -->
+
+<body>
+
+  <!-- Content -->
+  <div class="container project_container mt-5">
+    <div class="post">
+
+      <!---------------------------- HEADER ---------------------------->
+      <header class="project-title" style="text-align: center; ">
+        <h1 class="project-title" style="font-weight: bold; color: #404040">HumanMAC: Masked Motion Completion for Human
+          Motion Prediction</h1>
+        <h3>
+          <a href="https://lhchen.top" target="_blank" rel="noopener noreferrer">Ling-Hao Chen</a><sup>1</sup>,
+          <a href="" target="_blank" rel="noopener noreferrer">Jiawei Zhang</a><sup>2</sup>,
+          <a href="https://scholar.google.com/citations?user=W5796yEAAAAJ" target="_blank"
+            rel="noopener noreferrer">Yewen Li</a><sup>3</sup>,
+          <a href="https://www.linkedin.com/in/yrpang/" target="_blank" rel="noopener noreferrer">Yiren
+            Pang</a><sup>2</sup>,
+          <a href="https://xiaoboxia.github.io/" target="_blank" rel="noopener noreferrer">Xiaobo Xia</a><sup>4</sup>,
+          and
+          <a href="https://tongliang-liu.github.io/" target="_blank" rel="noopener noreferrer">Tongliang
+            Liu</a><sup>4</sup>
+        </h3>
+        <h5><sup>1</sup>Tsinghua University, <sup>2</sup>Xidian University, <sup>3</sup>Nanyang Technological
+          University, <sup>4</sup>The University of Sydney</h5>
+        <div class="publications project-links">
+          <a href="" class="btn" role="button" target="_blank" rel="noopener noreferrer">arXiv</a>
+          <a href="https://github.com/LinghaoChan/HumanMAC" class="btn" role="button" target="_blank"
+            rel="noopener noreferrer">Code</a>
+        </div>
+      </header>
+
+      <!---------------------------- ABSTRACT ---------------------------->
+      <div class="h-100 d-flex align-items-center justify-content-center" style="margin-top: 30px">
+        <div class="project-narrow" id="abstract" style="text-align: justify;">
+          <h3 style="text-align: center;">Abstract</h3>
+          <i>
+            Human motion prediction is a classical problem in computer vision and computer graphics, which has a wide
+            range of practical applications. Previous effects achieve great empirical performance based on an
+            encoding-decoding style. The methods of this style work by first encoding previous motions to latent
+            representations and then decoding the latent representations into predicted motions. However, in practice,
+            they are still unsatisfactory due to several issues, including complicated loss constraints, cumbersome
+            training processes, and scarce switch of different categories of motions in prediction. In this paper, to
+            address the above issues, we jump out of the foregoing style and propose a novel framework from a new
+            perspective. Specifically, our framework works in a denoising diffusion style. In the training stage, we
+            learn a motion diffusion model that generates motions from random noise. In the inference stage, with a
+            denoising procedure, we make motion prediction conditioning on observed motions to output more continuous
+            and controllable predictions. The proposed framework enjoys promising algorithmic properties, which only
+            needs one loss in optimization and is trained in an end-to-end manner. Additionally, it accomplishes the
+            switch of different categories of motions effectively, which is significant in realistic tasks, <i>e.g.</i>,
+            the animation task.
+            Comprehensive experiments on benchmarks confirm the superiority of the proposed framework. The project page
+            is available at <a href="https://lhchen.top/HumanMAC">https://lhchen.top/HumanMAC</a>.
+          </i>
+        </div>
+      </div>
+
+      <div class="h-100 d-flex align-items-center justify-content-center" style="margin-top: 30px">
+        <div class="project-narrow" id="architecture" style="text-align: justify;">
+          <h3 style="text-align: center;">Comparison with Previous Methods</h3>
+        </div>
+      </div>
+
+      <div class="center-container">
+        <div class="card card-edit" style="margin-top:20px">
+          <img id="k-eva" src="./assets/img/insight.png" class="pic">
+          <p style="margin:10px; text-align: justify;"><b>Comparison between the encoding-decoding fashion and masked
+              motion completion.</b> (a) The methods in the encoding-decoding fashion encode the observation into a
+            latent explicitly and then decodes the latent into prediction results. (b) The proposed motion diffusion
+            model generates motions from noise in the training stage. In the inference stage, it treats HMP as a masked
+            completion task.</p>
+        </div>
+      </div>
+
+      <div class="h-100 d-flex align-items-center justify-content-center" style="margin-top: 30px">
+        <div class="project-narrow" id="architecture" style="text-align: justify;">
+          <h3 style="text-align: center;">DCT-Completion in HumanMAC System</h3>
+        </div>
+      </div>
+
+      <div class="center-container">
+        <div class="card card-edit" style="margin-top:20px">
+          <img id="k-eva" src="./assets/img/alg.png" class="pic">
+          <p style="margin:10px; text-align: justify;">Comparison between the vanilla denoising procedure and the
+            proposed DCT-Completion.
+          </p>
+        </div>
+      </div>
+
+      <div style="margin-top:50px; padding: 0px !important">
+        <h3 style="text-align: center; margin-bottom:20px">Examples of Prediction Resultss
+        </h3>
+        <div class="justify-content-center list-group list-group-horizontal" id="list-tab" role="tablist">
+          <div class="list-group list-group-horizontal" style="max-width:600px">
+            <a class="list-group-item list-group-item-action active" id="h36m-list" data-toggle="list" href="#h36m"
+              role="tab" aria-controls="h36m" style="text-align: center;">Human3.6M</a>
+            <a class="list-group-item list-group-item-action" id="amass-list" data-toggle="list" href="#humaneva"
+              role="tab" aria-controls="humaneva" style="text-align: center;">HumanEva</a>
+          </div>
+        </div>
+        <div class="tab-content figure" id="nav-tabContent" style="padding: 0px !important">
+          <div class="tab-pane fade show active" id="h36m" role="tabpanel" aria-labelledby="h36m-list"
+            style="padding: 0px !important">
+            <div class="h-100 d-flex align-items-center justify-content-center">
+              <div class="dropdown list-group">
+                <button class="btn dropdown-toggle" style="max-width:600px" type="button" id="h36m-btn"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="selection">Eating</span>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="list-tab" role="tablist">
+                  <a class="dropdown-item dropdown-item-action" href="#Eating" id="h36m-dropdown" data-toggle="list"
+                    role="tab" aria-controls="Eating">Eating</a>
+                  <a class="dropdown-item dropdown-item-action" href="#Discussion" id="h36m-dropdown" data-toggle="list"
+                    role="tab" aria-controls="Discussion">Discussion</a>
+                  <a class="dropdown-item dropdown-item-action" href="#Directions" id="h36m-dropdown" data-toggle="list"
+                    role="tab" aria-controls="Directions">Directions</a>
+                  <a class="dropdown-item dropdown-item-action" href="#Greeting" id="h36m-dropdown" data-toggle="list"
+                    role="tab" aria-controls="Greeting">Greeting</a>
+                  <a class="dropdown-item dropdown-item-action" href="#Phoning" id="h36m-dropdown" data-toggle="list"
+                    role="tab" aria-controls="Phoning">Phoning</a>
+                  <a class="dropdown-item dropdown-item-action" href="#Photo" id="h36m-dropdown" data-toggle="list"
+                    role="tab" aria-controls="Photo">Photo</a>
+                  <a class="dropdown-item dropdown-item-action" href="#Posing" id="h36m-dropdown" data-toggle="list"
+                    role="tab" aria-controls="Posing">Posing</a>
+                  <a class="dropdown-item dropdown-item-action" href="#Purchases" id="h36m-dropdown" data-toggle="list"
+                    role="tab" aria-controls="Purchases">Purchases</a>
+                  <a class="dropdown-item dropdown-item-action" href="#Sitting" id="h36m-dropdown" data-toggle="list"
+                    role="tab" aria-controls="Sitting">Sitting</a>
+                  <a class="dropdown-item dropdown-item-action" href="#SittingDown" id="h36m-dropdown"
+                    data-toggle="list" role="tab" aria-controls="SittingDown">SittingDown</a>
+                  <a class="dropdown-item dropdown-item-action" href="#Smoking" id="h36m-dropdown" data-toggle="list"
+                    role="tab" aria-controls="Smoking">Smoking</a>
+                  <a class="dropdown-item dropdown-item-action" href="#Waiting" id="h36m-dropdown" data-toggle="list"
+                    role="tab" aria-controls="Waiting">Waiting</a>
+                  <a class="dropdown-item dropdown-item-action" href="#WalkDog" id="h36m-dropdown" data-toggle="list"
+                    role="tab" aria-controls="WalkDog">WalkDog</a>
+                  <a class="dropdown-item dropdown-item-action" href="#Walking" id="h36m-dropdown" data-toggle="list"
+                    role="tab" aria-controls="Walking">Walking</a>
+                  <a class="dropdown-item dropdown-item-action" href="#WalkTogether" id="h36m-dropdown"
+                    data-toggle="list" role="tab" aria-controls="WalkTogether">WalkTogether</a>
+                </div>
+              </div>
+            </div>
+            <div class="card" style="padding: 10px !important; margin-top:10px">
+              <div class="tab-content figure" id="nav-tabContent">
+                <div class="tab-pane fade show active gif" id="Eating" role="tabpanel">
+                  <img class="gif" src="./assets/img/motion/Eating_0.gif" style='width:100%'>
+                  <img class="gif" src="./assets/img/motion/Eating_1.gif" style='width:100%'>
+                  <img class="gif" src="./assets/img/motion/Eating_2.gif" style='width:100%'>
+                  <img class="gif" src="./assets/img/motion/Eating_3.gif" style='width:100%'>
+                  <img class="gif" src="./assets/img/motion/Eating_4.gif" style='width:100%'>
+                </div>
+                <div class="tab-pane fade" id="Discussion" role="tabpanel">
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Discussion_0.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Discussion_1.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Discussion_2.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Discussion_3.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Discussion_4.gif" style='width:100%'>
+                </div>
+                <div class="tab-pane fade" id="Directions" role="tabpanel">
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Directions_0.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Directions_1.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Directions_2.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Directions_3.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Directions_4.gif" style='width:100%'>
+                </div>
+                <div class="tab-pane fade" id="Greeting" role="tabpanel">
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Greeting_0.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Greeting_1.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Greeting_2.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Greeting_3.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Greeting_4.gif" style='width:100%'>
+                </div>
+                <div class="tab-pane fade" id="Phoning" role="tabpanel">
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Phoning_0.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Phoning_1.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Phoning_2.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Phoning_3.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Phoning_4.gif" style='width:100%'>
+                </div>
+                <div class="tab-pane fade" id="Photo" role="tabpanel">
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Photo_0.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Photo_1.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Photo_2.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Photo_3.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Photo_4.gif" style='width:100%'>
+                </div>
+                <div class="tab-pane fade" id="Posing" role="tabpanel">
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Posing_0.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Posing_1.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Posing_2.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Posing_3.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Posing_4.gif" style='width:100%'>
+                </div>
+                <div class="tab-pane fade" id="Purchases" role="tabpanel">
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Purchases_0.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Purchases_1.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Purchases_2.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Purchases_3.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Purchases_4.gif" style='width:100%'>
+                </div>
+                <div class="tab-pane fade" id="Sitting" role="tabpanel">
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Sitting_0.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Sitting_1.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Sitting_2.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Sitting_3.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Sitting_4.gif" style='width:100%'>
+                </div>
+                <div class="tab-pane fade" id="SittingDown" role="tabpanel">
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/SittingDown_0.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/SittingDown_1.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/SittingDown_2.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/SittingDown_3.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/SittingDown_4.gif" style='width:100%'>
+                </div>
+                <div class="tab-pane fade" id="Smoking" role="tabpanel">
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Smoking_0.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Smoking_1.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Smoking_2.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Smoking_3.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Smoking_4.gif" style='width:100%'>
+                </div>
+                <div class="tab-pane fade" id="Waiting" role="tabpanel">
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Waiting_0.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Waiting_1.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Waiting_2.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Waiting_3.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Waiting_4.gif" style='width:100%'>
+                </div>
+                <div class="tab-pane fade" id="WalkDog" role="tabpanel">
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/WalkDog_0.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/WalkDog_1.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/WalkDog_2.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/WalkDog_3.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/WalkDog_4.gif" style='width:100%'>
+                </div>
+                <div class="tab-pane fade" id="Walking" role="tabpanel">
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Walking_0.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Walking_1.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Walking_2.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Walking_3.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/Walking_4.gif" style='width:100%'>
+                </div>
+                <div class="tab-pane fade" id="WalkTogether" role="tabpanel">
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/WalkTogether_0.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/WalkTogether_1.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/WalkTogether_2.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/WalkTogether_3.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/WalkTogether_4.gif" style='width:100%'>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="humaneva" role="tabpanel" aria-labelledby="humaneva-list"
+            style="padding: 0px !important">
+            <div class="h-100 d-flex align-items-center justify-content-center">
+              <div class="dropdown list-group">
+                <button class="btn dropdown-toggle" style="max-width:600px" type="button" id="humaneva-btn"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="selection">Box</span>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="list-tab" role="tablist">
+                  <a class="dropdown-item dropdown-item-action" href="#eva_Box" id="humaneva-dropdown"
+                    data-toggle="list" role="tab" aria-controls="eva_Box">Box</a>
+                  <a class="dropdown-item dropdown-item-action" href="#Gestures" id="humaneva-dropdown"
+                    data-toggle="list" role="tab" aria-controls="Gestures">Gestures</a>
+                  <a class="dropdown-item dropdown-item-action" href="#Jog" id="humaneva-dropdown" data-toggle="list"
+                    role="tab" aria-controls="Jog">Jog</a>
+                  <a class="dropdown-item dropdown-item-action" href="#ThrowCatch" id="humaneva-dropdown"
+                    data-toggle="list" role="tab" aria-controls="ThrowCatch">ThrowCatch</a>
+                  <a class="dropdown-item dropdown-item-action" href="#Walking" id="humaneva-dropdown"
+                    data-toggle="list" role="tab" aria-controls="Walking">Walking</a>
+                </div>
+              </div>
+            </div>
+            <div class="card" style="padding: 10px !important; margin-top:10px">
+              <div class="tab-content figure" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="eva_Box" role="tabpanel">
+                  <img class="gif" src="./assets/img/motion/eva_Box_0.gif" style='width:100%'>
+                  <img class="gif" src="./assets/img/motion/eva_Box_1.gif" style='width:100%'>
+                  <img class="gif" src="./assets/img/motion/eva_Box_2.gif" style='width:100%'>
+                </div>
+                <div class="tab-pane fade" id="Gestures" role="tabpanel">
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/eva_Gestures_0.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/eva_Gestures_1.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/eva_Gestures_2.gif" style='width:100%'>
+                </div>
+                <div class="tab-pane fade" id="Jog" role="tabpanel">
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/eva_Jog_0.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/eva_Jog_1.gif" style='width:100%'>
+                  <img class="gif lazy" data-src="./assets/img/motion/eva_Jog_2.gif" style='width:100%'>
+                </div>
+                <div class="tab-pane fade" id="ThrowCatch" role="tabpanel">
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/eva_ThrowCatch_0.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/eva_ThrowCatch_1.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/eva_ThrowCatch_2.gif" style='width:100%'>
+                </div>
+                <div class="tab-pane fade" id="Walking" role="tabpanel">
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/eva_Walking_0.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/eva_Walking_1.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/motion/eva_Walking_2.gif" style='width:100%'>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!---------------------------- CONTROLLABLE MOTION PREDICTION ---------------------------->
+      <div style="margin-top:50px; padding: 0px !important">
+        <h3 style="text-align: center; margin-bottom:20px">Examples of Part-body Controllable Prediction
+        </h3>
+        <div class="tab-content figure" id="nav-tabContent" style="padding: 0px !important">
+          <div class="tab-pane fade show active" id="h36m" role="tabpanel" aria-labelledby="h36m-list"
+            style="padding: 0px !important">
+            <div class="h-100 d-flex align-items-center justify-content-center">
+              <div class="dropdown list-group">
+                <button class="btn dropdown-toggle" style="max-width:600px" type="button" id="h36m-btn"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="selection">fix_torso</span>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="list-tab" role="tablist">
+                  <a class="dropdown-item dropdown-item-action" href="#fix_torso" id="h36m-dropdown" data-toggle="list"
+                    role="tab" aria-controls="fix_torso">fix_torso</a>
+                  <a class="dropdown-item dropdown-item-action" href="#fix_right_arm" id="h36m-dropdown"
+                    data-toggle="list" role="tab" aria-controls="fix_right_arm">fix_right_arm</a>
+                  <a class="dropdown-item dropdown-item-action" href="#fix_right_leg" id="h36m-dropdown"
+                    data-toggle="list" role="tab" aria-controls="fix_right_leg">fix_right_leg</a>
+                  <a class="dropdown-item dropdown-item-action" href="#fix_left_leg" id="h36m-dropdown"
+                    data-toggle="list" role="tab" aria-controls="fix_left_leg">fix_left_leg</a>
+                  <a class="dropdown-item dropdown-item-action" href="#fix_left_arm" id="h36m-dropdown"
+                    data-toggle="list" role="tab" aria-controls="fix_left_arm">fix_left_arm</a>
+                  <a class="dropdown-item dropdown-item-action" href="#fix_lower" id="h36m-dropdown" data-toggle="list"
+                    role="tab" aria-controls="fix_lower">fix_lower</a>
+                  <a class="dropdown-item dropdown-item-action" href="#fix_upper" id="h36m-dropdown" data-toggle="list"
+                    role="tab" aria-controls="fix_upper">fix_upper</a>
+                </div>
+              </div>
+            </div>
+            <p style="text-align: center;">
+              <b><i>Note:</i></b> The first column is the observation frame and the second column is the ground truth
+              that provides fixed part of the body.
+            </p>
+            <div class="card" style="padding: 10px !important; margin-top:10px">
+              <div class="tab-content figure" id="nav-tabContent">
+                <div class="tab-pane fade show active gif" id="fix_torso" role="tabpanel">
+                  <img class="gif" src="./assets/img/control/torso_1.gif" style='width:100%'>
+                  <img class="gif" src="./assets/img/control/torso_2.gif" style='width:100%'>
+                  <img class="gif" src="./assets/img/control/torso_3.gif" style='width:100%'>
+                  <img class="gif" src="./assets/img/control/torso_4.gif" style='width:100%'>
+                  <img class="gif" src="./assets/img/control/torso_5.gif" style='width:100%'>
+                  <p style="margin: 10px;">We fix the 4 joints at the
+                    torso
+                    and can see that the predicted results are biased towards determinism, with only slight variations
+                    in
+                    the arms and legs.
+                    This is consistent with the forward dynamics of the human skeleton.</p>
+                </div>
+                <div class="tab-pane fade" id="fix_right_arm" role="tabpanel">
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/control/rightarm_1.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/control/rightarm_2.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/control/rightarm_3.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/control/rightarm_4.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/control/rightarm_5.gif" style='width:100%'>When fixing the right arm,
+                  <p style="margin: 10px;">we can observe that the torso is clearly affected by the fixation of the
+                    right arm, and likewise
+                    the
+                    rest of the body.
+                    This makes some of the predictions distorted, but most of them are still valid.</p>
+                </div>
+                <div class="tab-pane fade" id="fix_right_leg" role="tabpanel">
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/control/rightleg_1.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/control/rightleg_2.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/control/rightleg_3.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/control/rightleg_4.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/control/rightleg_5.gif" style='width:100%'>
+                  <p style="margin: 10px;">When fixing the left leg, we see
+                    that the predicted results become diverse.
+                    An interesting phenomenon is that the response of the right leg naturally aligns with the left leg,
+                    despite controlling only the left leg.</p>
+                </div>
+                <div class="tab-pane fade" id="fix_left_leg" role="tabpanel">
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/control/leftleg_1.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/control/leftleg_2.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/control/leftleg_3.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/control/leftleg_4.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/control/leftleg_5.gif" style='width:100%'>
+                  <p style="margin: 10px;">The case of the fixing left leg is
+                    similar to fixing the right leg,
+                    where the predicted motion still becomes diverse within the context constraint.</p>
+                </div>
+                <div class="tab-pane fade" id="fix_left_arm" role="tabpanel">
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/control/leftarm_1.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/control/leftarm_2.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/control/leftarm_3.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/control/leftarm_4.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/control/leftarm_5.gif" style='width:100%'>
+                  <p style="margin: 10px;">Fixing the left arm is the same as
+                    when fixing the right arm.</p>
+                </div>
+                <div class="tab-pane fade" id="fix_lower" role="tabpanel">
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/control/fixlower_1.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/control/fixlower_2.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/control/fixlower_3.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/control/fixlower_4.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/control/fixlower_5.gif" style='width:100%'>
+                  <p style="margin: 10px;">When fixing the entire lower body,
+                    the upper body still produces diverse predictions.
+                    action.</p>
+                </div>
+                <div class="tab-pane fade" id="fix_upper" role="tabpanel">
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/control/fixupper_1.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/control/fixupper_2.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/control/fixupper_3.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/control/fixupper_4.gif" style='width:100%'>
+                  <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                    data-src="./assets/img/control/fixupper_5.gif" style='width:100%'>
+                  <p style="margin: 10px;">When fixing the entire upper body,
+                    the prediction becomes deterministic.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:50px; padding: 0px !important">
+      <h3 style="text-align: center; margin-bottom:20px">Examples of Motion Switch Ability
+      </h3>
+      <div class="tab-content figure" id="nav-tabContent" style="padding: 0px !important">
+        <div class="tab-pane fade show active" id="h36m" role="tabpanel" aria-labelledby="h36m-list"
+          style="padding: 0px !important">
+          <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="dropdown list-group">
+              <button class="btn dropdown-toggle" style="max-width:600px" type="button" id="h36m-btn"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="selection">switch_eg_1</span>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="list-tab" role="tablist">
+                <a class="dropdown-item dropdown-item-action" href="#switch_eg_1" id="h36m-dropdown" data-toggle="list"
+                  role="tab" aria-controls="switch_eg_1">switch_eg_1</a>
+                <a class="dropdown-item dropdown-item-action" href="#switch_eg_2" id="h36m-dropdown" data-toggle="list"
+                  role="tab" aria-controls="switch_eg_2">switch_eg_2</a>
+                <a class="dropdown-item dropdown-item-action" href="#switch_eg_3" id="h36m-dropdown" data-toggle="list"
+                  role="tab" aria-controls="switch_eg_3">switch_eg_3</a>
+                <a class="dropdown-item dropdown-item-action" href="#switch_eg_4" id="h36m-dropdown" data-toggle="list"
+                  role="tab" aria-controls="switch_eg_4">switch_eg_4</a>
+                <a class="dropdown-item dropdown-item-action" href="#switch_eg_5" id="h36m-dropdown" data-toggle="list"
+                  role="tab" aria-controls="switch_eg_5">switch_eg_5</a>
+                <a class="dropdown-item dropdown-item-action" href="#switch_eg_6" id="h36m-dropdown" data-toggle="list"
+                  role="tab" aria-controls="switch_eg_6">switch_eg_6</a>
+                <a class="dropdown-item dropdown-item-action" href="#switch_eg_7" id="h36m-dropdown" data-toggle="list"
+                  role="tab" aria-controls="switch_eg_7">switch_eg_7</a>
+                <a class="dropdown-item dropdown-item-action" href="#switch_eg_8" id="h36m-dropdown" data-toggle="list"
+                  role="tab" aria-controls="switch_eg_8">switch_eg_8</a>
+                <a class="dropdown-item dropdown-item-action" href="#switch_eg_9" id="h36m-dropdown" data-toggle="list"
+                  role="tab" aria-controls="switch_eg_9">switch_eg_9</a>
+              </div>
+            </div>
+          </div>
+          <div class="card" style="padding: 10px !important; margin-top:10px">
+            <div class="tab-content figure" id="nav-tabContent">
+              <div class="tab-pane fade show active gif" id="switch_eg_1" role="tabpanel">
+                <img class="gif" src="./assets/img/transfer/transfer_1.gif" style='width:100%'>
+              </div>
+              <div class="tab-pane fade" id="switch_eg_2" role="tabpanel">
+                <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                  data-src="./assets/img/transfer/transfer_2.gif" style='width:100%'>
+              </div>
+              <div class="tab-pane fade" id="switch_eg_3" role="tabpanel">
+                <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                  data-src="./assets/img/transfer/transfer_3.gif" style='width:100%'>
+              </div>
+              <div class="tab-pane fade" id="switch_eg_4" role="tabpanel">
+                <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                  data-src="./assets/img/transfer/transfer_4.gif" style='width:100%'>
+              </div>
+              <div class="tab-pane fade" id="switch_eg_5" role="tabpanel">
+                <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                  data-src="./assets/img/transfer/transfer_5.gif" style='width:100%'>
+              </div>
+              <div class="tab-pane fade" id="switch_eg_6" role="tabpanel">
+                <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                  data-src="./assets/img/transfer/transfer_6.gif" style='width:100%'>
+              </div>
+              <div class="tab-pane fade" id="switch_eg_7" role="tabpanel">
+                <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                  data-src="./assets/img/transfer/transfer_7.gif" style='width:100%'>
+              </div>
+              <div class="tab-pane fade" id="switch_eg_8" role="tabpanel">
+                <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                  data-src="./assets/img/transfer/transfer_8.gif" style='width:100%'>
+              </div>
+              <div class="tab-pane fade" id="switch_eg_9" role="tabpanel">
+                <img class="gif lazy" src="./assets/img/transfer/placeholder_comparison.png"
+                  data-src="./assets/img/transfer/transfer_9.gif" style='width:100%'>
+              </div>
+              <p style="text-align: justify; margin: 10px;">We provide more examples of motion switch. The red-black
+                skeleton
+                represents the source motion. The
+                orange-blue skeleton constitutes the target motion. Once the switch starts, the skeleton colors
+                change to purple and green.
+                We can see that most of the switchs are very natural and smooth.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="h-100 d-flex align-items-center justify-content-center" style="margin-top: 30px">
+      <div class="project-narrow" id="bibtex" style="text-align: justify;">
+        <h3 style="text-align: center;">Citation</h3>
+        <div class="bibtex">
+
+          <figure class="highlight">
+            <pre><code class="language-bibtex" data-lang="bibtex"><span class="nc">@article</span><span class="p">{</span><span class="nl">chen2023humanmac</span><span class="p">,</span>
+<span class="na">title</span><span class="p">=</span><span class="s">{HumanMAC: Masked Motion Completion for Human Motion Prediction}</span><span class="p">,</span>
+<span class="na">author</span><span class="p">=</span><span class="s">{Chen, Ling-Hao and Zhang, Jiawei and Li, Yewen and Pang, Yiren and Xia, Xiaobo and Liu, Tongliang}</span><span class="p">,</span>
+<span class="na">year</span><span class="p">=</span><span class="s">{2023}</span>
+<span class="p">}</span></code></pre>
+            <!-- <span class="na">journal</span><span class="p">=</span><span class="s">{arXiv preprint arXiv:xxxx}</span><span class="p">,</span> -->
+          </figure>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+  <!-- JavaScripts -->
+  <!-- jQuery -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+  <!-- Bootsrap & MDB scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
+    integrity="sha256-SyTu6CwrfOhaznYZPoolVw2rxoY7lKYKQvqbtqN93HI=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js"
+    integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script>
+
+  <!-- Mansory & imagesLoaded -->
+  <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
+    integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+  <script defer src="./assets/js/mansory.js" type="text/javascript"></script>
+
+  <!-- Medium Zoom JS -->
+  <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"
+    integrity="sha256-EdPgYcPk/IIrw7FYeuJQexva49pVRZNmt3LculEr7zM=" crossorigin="anonymous"></script>
+  <script src="./assets/js/zoom.js"></script><!-- Load Common JS -->
+  <script src="./assets/js/common.js"></script>
+
+  <!-- MathJax -->
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        tags: 'ams'
+      }
+    };
+  </script>
+  <script defer type="text/javascript" id="MathJax-script"
+    src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+  <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+
+  <script>
+    $(function () {
+      $(".dropdown-menu a").click(function () {
+        var selText = $(this).text();
+        $(this).parent().parent().find(".selection").html(selText);
+      });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      var lazyloadThrottleTimeout;
+
+      var elements = document.getElementsByClassName('dropdown-item');
+
+      function lazyload(event) {
+        if (lazyloadThrottleTimeout) {
+          clearTimeout(lazyloadThrottleTimeout);
+        }
+        img_id = this.text
+        img2 = $("#" + img_id).children("img")
+        console.log(img2)
+        for (var i = 0; i < img2.length; i++) {
+          img = img2.get(i)
+          if ($(img).hasClass('lazy')) {
+            img.src = img.dataset.src;
+            img.classList.remove('lazy');
+            lazyloadThrottleTimeout = setTimeout(function () { }, 20);
+          }
+        }
+      }
+
+      Array.from(elements).forEach((element) => {
+        element.addEventListener('click', lazyload);
+      });
+    });
+  </script>
+</body>
+
+</html>
