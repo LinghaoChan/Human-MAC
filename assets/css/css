@@ -525,3 +525,9 @@
   -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
 }
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
